@@ -1,9 +1,12 @@
 package com.wedpt.springjavamvc.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +24,10 @@ public class product {
     private long sold;
     private String factory;
     private String target;
+
+    // one product => many detail order
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> details;
 
     public long getId() {
         return id;

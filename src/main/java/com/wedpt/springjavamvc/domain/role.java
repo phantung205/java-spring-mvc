@@ -1,9 +1,12 @@
 package com.wedpt.springjavamvc.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +18,10 @@ public class role {
 
     private String name;
     private String Desciption;
+
+    // one role => many user
+    @OneToMany(mappedBy = "role")
+    private List<User> users;
 
     public Long getId() {
         return id;

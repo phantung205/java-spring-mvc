@@ -1,9 +1,14 @@
 package com.wedpt.springjavamvc.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,8 +17,16 @@ public class order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long userId;
     private double totalPrice;
+
+    // many order => one user
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    // one order => many order detail
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> details;
 
     public long getId() {
         return id;
@@ -21,14 +34,6 @@ public class order {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public double getTotalPrice() {
@@ -41,7 +46,7 @@ public class order {
 
     @Override
     public String toString() {
-        return "orders [id=" + id + ", userId=" + userId + ", totalPrice=" + totalPrice + "]";
+        return "order [id=" + id + ", totalPrice=" + totalPrice + ", user=" + user + "]";
     }
 
 }
