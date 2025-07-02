@@ -35,38 +35,22 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="header d-flex justify-content-between">
-                                                <h2 class="title d-inline">Table User</h2>
-                                                <a class="btn btn-primary" href="/admin/user/create">Create a User</a>
+                                                <h2 class="title d-inline">Table User with id = ${id}</h2>
                                             </div>
                                             <hr>
+                                            <div class="card" style="width: 60%;">
+                                                <div class="card-header">
+                                                    user imformation
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">id: ${user.id}</li>
+                                                    <li class="list-group-item">Email: ${user.email}</li>
+                                                    <li class="list-group-item">Full name: ${user.fullname}</li>
+                                                    <li class="list-group-item">Address: ${user.address}</li>
+                                                </ul>
+                                            </div>
+                                            <a href="/admin/user" class="btn btn-success mt-5">Back</a>
                                         </div>
-                                        <table class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Full Name</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="user" items="${users1}">
-                                                    <tr>
-                                                        <th>${user.id}</th>
-                                                        <td>${user.email}</td>
-                                                        <td>${user.fullname}</td>
-                                                        <td>
-                                                            <a href="/admin/user/${user.id}"
-                                                                class="btn btn-success me-3">View</a>
-                                                            <a href="/admin/user/update/${user.id}"
-                                                                class="btn btn-warning me-3">Update</a>
-                                                            <a href="/admin/user/delete/${user.id}"
-                                                                class="btn btn-danger me-3">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
 
                                     </div>
                                 </div>

@@ -5,50 +5,101 @@
       <html lang="en">
 
       <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <!-- Latest compiled and minified CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>user</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="/css/styles.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+          $(document).ready(() => {
+            const avatarFile = $("#avatarFile");
+            avatarFile.change(function (e) {
+              const imgURL = URL.createObjectURL(e.target.files[0]);
+              $("#avatarPreview").attr("src", imgURL);
+              $("#avatarPreview").css({ "display": "block" });
+            });
+          });
+        </script>
       </head>
 
-      <body>
-        <div class="container mt-5">
-          <div class="row">
-            <div class="col-md-6 col-12 mx-auto">
-              <h3>Create User</h3>
-              <hr class="my-4" />
-              <form:form action="/admin/user/create" method="post" modelAttribute="newUser">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <form:input type="email" id="email" class="form-control" placeholder="name@example.com"
-                    path="email" />
+      <body class="sb-nav-fixed">
+        <!-- reuse code block -->
+        <jsp:include page="../layout/header.jsp" />
+        <!--  -->
+        <div id="layoutSidenav">
+          <!-- reuse code block -->
+          <jsp:include page="../layout/sidebar.jsp" />
+          <!--  -->
+          <div id="layoutSidenav_content">
+            <main>
+              <div class="container-fluid px-4">
+                <h1 class="mt-4">Dashboard</h1>
+                <ol class="breadcrumb mb-4">
+                  <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                  <li class="breadcrumb-item active">user</li>
+                </ol>
+                <div class=" mt-5">
+                  <div class="row">
+                    <div class="col-md-6 col-12 mx-auto">
+                      <h3>Create User</h3>
+                      <hr class="my-4" />
+                      <form:form action="/admin/user/create" method="post" modelAttribute="newUser" class="row g-3">
+                        <div class="mb-3 col-md-6 col-12">
+                          <label for="email" class="form-label">Email</label>
+                          <form:input type="email" id="email" class="form-control" placeholder="name@example.com"
+                            path="email" />
+                        </div>
+                        <div class="mb-3 col-md-6 col-12">
+                          <label for="password" class="form-label">Password</label>
+                          <form:input type="password" id="password" class="form-control" path="password" />
+                        </div>
+                        <div class="mb-3 col-md-6 col-12">
+                          <label for="phone" class="form-label">Phone number</label>
+                          <form:input type="text" id="phone" class="form-control" path="phone" />
+                        </div>
+                        <div class="mb-3 col-md-6 col-12">
+                          <label for="fullname" class="form-label">Full name</label>
+                          <form:input type="text" id="fullname" class="form-control" path="fullname" />
+                        </div>
+                        <div class="mb-3 col-12">
+                          <label for="address" class="form-label">Address</label>
+                          <form:input type="text" id="address" class="form-control" path="address" />
+                        </div>
+                        <div class="col-md-6 col-12">
+                          <label for="form-select" class="form-label">Role</label>
+                          <select class="form-select" aria-label="Default select example" id="form-select">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="USER">USER</option>
+                          </select>
+                        </div>
+                        <div class="mb-3 col-md-6 col-12">
+                          <label for="avatarFile" class="form-label">Avatar</label>
+                          <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg">
+                        </div>
+                        <div class="col-12 mb-3">
+                          <img style="max-height: 250px; display: none;" id="avatarPreview" alt="avatar preview">
+                        </div>
+                        <div class="col-12 mb-5">
+                          <button type="submit" class="btn btn-primary ">Create</button>
+                        </div>
+                      </form:form>
+                    </div>
+                  </div>
                 </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <form:input type="password" id="password" class="form-control" path="password" />
-                </div>
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Phone number</label>
-                  <form:input type="text" id="phone" class="form-control" path="phone" />
-                </div>
-                <div class="mb-3">
-                  <label for="fullname" class="form-label">Full name</label>
-                  <form:input type="text" id="fullname" class="form-control" path="fullname" />
-                </div>
-                <div class="mb-3">
-                  <label for="address" class="form-label">Address</label>
-                  <form:input type="text" id="address" class="form-control" path="address" />
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form:form>
-            </div>
+              </div>
+            </main>
+            <!-- reuse code block -->
+            <jsp:include page="../layout/footer.jsp" />
+            <!--  -->
           </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+          crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
       </body>
 
       </html>

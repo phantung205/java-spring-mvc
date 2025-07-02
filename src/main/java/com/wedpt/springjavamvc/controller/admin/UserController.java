@@ -1,4 +1,4 @@
-package com.wedpt.springjavamvc.controller;
+package com.wedpt.springjavamvc.controller.admin;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +57,7 @@ public class UserController {
     public String getUserPage(Model model) {
         List<User> users = userService.getAllUser();
         model.addAttribute("users1", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     // get user by id
@@ -65,7 +65,7 @@ public class UserController {
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
     // update user
