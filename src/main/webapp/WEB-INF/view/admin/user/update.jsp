@@ -62,6 +62,11 @@
                                                     <form:input type="text" id="address" class="form-control"
                                                         path="address" />
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="role" class="form-label">role</label>
+                                                    <form:input type="text" id="role" class="form-control"
+                                                        path="role.name" />
+                                                </div>
                                                 <button type="submit" class="btn btn-warning">Update</button>
                                             </form:form>
                                         </div>

@@ -1,8 +1,8 @@
 package com.wedpt.springjavamvc.controller.admin;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,44 +10,55 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.wedpt.springjavamvc.domain.User;
-import com.wedpt.springjavamvc.repository.UserRepository;
+
+import com.wedpt.springjavamvc.service.UploadService;
 import com.wedpt.springjavamvc.service.UserService;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
-
+    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // page home
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        List<User> arrUser = this.userService.getAllUserByEmail("1@gmail.com");
-        System.out.println(arrUser);
-        model.addAttribute("phantungit", "fffff");
-        model.addAttribute("name", "abc");
-        return "hello";
-    }
+    // @GetMapping("/")
+    // public String getHomePage(Model model) {
+    // List<User> arrUser = this.userService.getAllUserByEmail("1@gmail.com");
+    // System.out.println(arrUser);
+    // model.addAttribute("phantungit", "fffff");
+    // model.addAttribute("name", "abc");
+    // return "hello";
+    // }
 
     // page form create user
-    @RequestMapping("/admin/user/create")
+    @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
     // form action this url
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createUserPage(Model model, @ModelAttribute("newUser") User phantungit) {
+    @PostMapping(value = "/admin/user/create")
+    public String createUserPage(Model model, @ModelAttribute("newUser") User phantungit,
+            @RequestParam("phantungitFile") MultipartFile file) {
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(phantungit.getPassword());
+
+        phantungit.setPassword(hashPassword);
+        phantungit.setAvatar(avatar);
+        phantungit.setRole(this.userService.getRoleByName(phantungit.getRole().getName()));
         this.userService.handlSaveUser(phantungit);
         return "redirect:/admin/user";
     }

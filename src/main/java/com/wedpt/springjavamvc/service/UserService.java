@@ -6,14 +6,18 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.wedpt.springjavamvc.domain.User;
+import com.wedpt.springjavamvc.domain.role;
+import com.wedpt.springjavamvc.repository.RoleRepository;
 import com.wedpt.springjavamvc.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     // public String handlHome() {
@@ -46,4 +50,8 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
+    // get role by name
+    public role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
+    }
 }
