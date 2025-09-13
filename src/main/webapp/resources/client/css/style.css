@@ -232,7 +232,7 @@
 
     .hero-header,
     .page-header {
-        margin-top: 152px !important;
+        margin-top: 90px !important;
     }
 }
 
@@ -314,12 +314,20 @@
 }
 
 .fruite .fruite-item .fruite-img {
+    height: 200px;
+    /* hoặc chiều cao bạn muốn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
 }
 
 .fruite .fruite-item .fruite-img img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
     transition: 0.5s;
 }
 
@@ -398,6 +406,25 @@
 /*** Banner Section Start ***/
 .banner .banner-btn:hover {
     background: var(--bs-primary);
+}
+
+.banner-img-wrapper {
+    width: 100%;
+    height: 320px;
+    /* hoặc chiều cao bạn muốn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f8f9fa;
+    /* màu nền nếu ảnh không đủ */
+}
+
+.banner-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 /*** Banner Section End ***/

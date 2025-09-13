@@ -25,12 +25,52 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Dashboard</h1>
+                            <h1 class="mt-4">Manage Product</h1>
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Products</li>
                             </ol>
-                            <div>table product</div>
+                            <div class=" mt-5">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="header d-flex justify-content-between">
+                                            <h2 class="title d-inline">Table Product</h2>
+                                            <a class="btn btn-primary" href="/admin/product/create">Create a Product</a>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Factory</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="product" items="${products}">
+                                                <tr>
+                                                    <th>${product.id}</th>
+                                                    <td>${product.name}</td>
+                                                    <td>${product.price}</td>
+                                                    <td>${product.factory}</td>
+                                                    <td>
+                                                        <a href="/admin/product/${product.id}"
+                                                            class="btn btn-success me-3">View</a>
+                                                        <a href="/admin/product/update/${product.id}"
+                                                            class="btn btn-warning me-3">Update</a>
+                                                        <a href="/admin/product/delete/${product.id}"
+                                                            class="btn btn-danger me-3">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
                         </div>
                     </main>
                     <!-- reuse code block -->

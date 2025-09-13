@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.wedpt.springjavamvc.domain.User;
 import com.wedpt.springjavamvc.domain.role;
+import com.wedpt.springjavamvc.domain.DTO.RegisterDTO;
 import com.wedpt.springjavamvc.repository.RoleRepository;
 import com.wedpt.springjavamvc.repository.UserRepository;
 
@@ -30,9 +31,9 @@ public class UserService {
     }
 
     // get all user by email
-    public List<User> getAllUserByEmail(String Email) {
-        return this.userRepository.findByEmail(Email);
-    }
+    // public List<User> getAllUserByEmail(String Email) {
+    // return this.userRepository.findByEmail(Email);
+    // }
 
     // create user
     public User handlSaveUser(User phantung) {
@@ -53,5 +54,18 @@ public class UserService {
     // get role by name
     public role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    public User RegisterDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullname(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setPassword(registerDTO.getPassword());
+        user.setEmail(registerDTO.getEmail());
+        return user;
+    }
+
+    // get user by name email
+    public User getUserByEmail(String Email) {
+        return this.userRepository.findByEmail(Email);
     }
 }
